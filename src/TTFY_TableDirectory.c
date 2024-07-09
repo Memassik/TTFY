@@ -210,6 +210,9 @@ TTFY_TableRecord *TTFY_TableDirectoryGetTableRecord(TTFY_TableDirectory *tableDi
     case TTFY_TABLE_NAME_HHEA:
         record = TTFY_TableDirectoryFindTable(tableDirectory, "hhea");
         break;
+    case TTFY_TABLE_NAME_MAXP:
+        record = TTFY_TableDirectoryFindTable(tableDirectory, "maxp");
+        break;
     default:
         return NULL;
         break;

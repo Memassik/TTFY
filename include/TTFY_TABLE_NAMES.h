@@ -5,7 +5,8 @@ typedef enum
 {
     TTFY_TABLE_NAME_None,
     TTFY_TABLE_NAME_HEAD,
-    TTFY_TABLE_NAME_HHEA
+    TTFY_TABLE_NAME_HHEA,
+    TTFY_TABLE_NAME_MAXP
 } TTFY_TableNameEnum;
 
 #endif

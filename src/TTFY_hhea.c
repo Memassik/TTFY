@@ -66,6 +66,7 @@ TTFY_HHEA *TTFY_HHEACreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory)
     TTFY_BufferGetI16(buffer);
     ret->metricDataFormat = TTFY_BufferGetI16(buffer);
     ret->numberOfHMetrics = TTFY_BufferGetU16(buffer);
+    return ret;
 }
 
 void TTFY_HHEADestroy(TTFY_HHEA **hhea)
