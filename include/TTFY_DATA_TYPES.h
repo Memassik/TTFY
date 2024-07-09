@@ -16,8 +16,7 @@
 #define UFWord uint16_t
 #define F2DOT14 float
 #define LONGDATETIME int64_t
-#define Tag uint8_t[4]
-#define TagP uint8_t *
+#define Tag uint8_t *
 #define Offset8 uint8_t
 #define Offset16 uint16_t
 #define Offset24 uint32_t
