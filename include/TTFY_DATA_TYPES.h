@@ -11,16 +11,16 @@
 #define int24 int32_t
 #define int32 int32_t
 #define uint32 uint32_t
-#define Fixed float
+#define Fixed int32_t
 #define FWord int16_t
 #define UFWord uint16_t
-#define F2DOT14 float
+#define F2DOT14 int16_t
 #define LONGDATETIME int64_t
 #define Tag uint8_t *
 #define Offset8 uint8_t
 #define Offset16 uint16_t
 #define Offset24 uint32_t
 #define Offset32 uint32_t
-#define Version16Dot16 float
+#define Version16Dot16 uint32_t
 
 #endif
