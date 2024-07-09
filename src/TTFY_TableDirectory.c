@@ -213,6 +213,9 @@ TTFY_TableRecord *TTFY_TableDirectoryGetTableRecord(TTFY_TableDirectory *tableDi
     case TTFY_TABLE_NAME_MAXP:
         record = TTFY_TableDirectoryFindTable(tableDirectory, "maxp");
         break;
+    case TTFY_TABLE_NAME_HTMX:
+        record = TTFY_TableDirectoryFindTable(tableDirectory, "htmx");
+        break;
     default:
         return NULL;
         break;
