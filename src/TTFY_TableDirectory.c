@@ -216,6 +216,9 @@ TTFY_TableRecord *TTFY_TableDirectoryGetTableRecord(TTFY_TableDirectory *tableDi
     case TTFY_TABLE_NAME_HTMX:
         record = TTFY_TableDirectoryFindTable(tableDirectory, "htmx");
         break;
+    case TTFY_TABLE_NAME_NAME:
+        record = TTFY_TableDirectoryFindTable(tableDirectory, "name");
+        break;
     default:
         return NULL;
         break;

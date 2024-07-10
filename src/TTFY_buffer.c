@@ -189,3 +189,13 @@ TTFY_API void TTFY_BufferSetPosition(TTFY_Buffer *buffer, uint64_t position)
     }
     buffer->position = position;
 }
+
+TTFY_API void *TTFY_BufferGetAddressUnderPos(TTFY_Buffer *buffer)
+{
+    if (!buffer)
+    {
+        fprintf(stderr, "%s\n", "Passed Non Valid TTFY_Buffer");
+        return NULL;
+    }
+    return &buffer->buffer[buffer->position];
+}

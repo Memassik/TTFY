@@ -30,5 +30,6 @@ TTFY_API Offset32 TTFY_BufferGetOffset32(TTFY_Buffer *buffer);
 TTFY_API Version16Dot16 TTFY_BufferGetVersion16Dot16(TTFY_Buffer *buffer);
 TTFY_API uint64_t TTFY_BufferGetPosition(TTFY_Buffer *buffer);
 TTFY_API void TTFY_BufferSetPosition(TTFY_Buffer *buffer, uint64_t position);
+TTFY_API void *TTFY_BufferGetAddressUnderPos(TTFY_Buffer *buffer);
 
 #endif
