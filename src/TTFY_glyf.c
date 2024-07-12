@@ -83,7 +83,9 @@ struct TTFY_GLYFComposite
     uint16 MaxComponentDepth;
 };
 
-TTFY_GLYFComposite *TTFY_GLYFCompositeCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *header, TTFY_MAXP *maxp)
+TTFY_GLYFComposite *TTFY_GLYFCompositeCreate(TTFY_Buffer *buffer,
+                                             TTFY_GLYFHeader *header,
+                                             TTFY_MAXP *maxp)
 {
     if (!buffer)
     {
@@ -104,7 +106,8 @@ TTFY_GLYFComposite *TTFY_GLYFCompositeCreate(TTFY_Buffer *buffer, TTFY_GLYFHeade
     TTFY_GLYFComposite *ret = malloc(sizeof(TTFY_GLYFComposite));
     if (!ret)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For TTFY_GLYFComposite");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory For TTFY_GLYFComposite");
         return NULL;
     }
     ret->childernLength = 0;
@@ -114,15 +117,19 @@ TTFY_GLYFComposite *TTFY_GLYFCompositeCreate(TTFY_Buffer *buffer, TTFY_GLYFHeade
 
     if (!ret->MaxComponentElements)
     {
-        fprintf(stderr, "%s\n", "Invalid TTFY_TTFY_GLYFComposite MaxComponentElements has been passed");
+        fprintf(stderr, "%s\n",
+                "Invalid TTFY_TTFY_GLYFComposite MaxComponentElements has been "
+                "passed");
         free(ret);
         return NULL;
     }
 
-    ret->children = malloc(sizeof(TTFY_GLYFComposite) * ret->MaxComponentElements);
+    ret->children =
+        malloc(sizeof(TTFY_GLYFComposite) * ret->MaxComponentElements);
     if (!ret->children)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For TTFY_GLYFComposite Children");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory For TTFY_GLYFComposite Children");
         free(ret);
         return NULL;
     }
@@ -189,7 +196,8 @@ TTFY_GLYFComposite *TTFY_GLYFCompositeCreate(TTFY_Buffer *buffer, TTFY_GLYFHeade
         ret->instructionLength = TTFY_BufferGetU16(buffer);
         if (!ret->instructionLength)
         {
-            fprintf(stderr, "%s\n", "Invalid instructtion Length TTFY_GLYFComposite Children");
+            fprintf(stderr, "%s\n",
+                    "Invalid instructtion Length TTFY_GLYFComposite Children");
             free(ret->children);
             free(ret);
             return NULL;
@@ -197,7 +205,9 @@ TTFY_GLYFComposite *TTFY_GLYFCompositeCreate(TTFY_Buffer *buffer, TTFY_GLYFHeade
         ret->intsuctions = malloc(sizeof(uint8) * ret->instructionLength);
         if (!ret->intsuctions)
         {
-            fprintf(stderr, "%s\n", "Failed To Allocate Memory For TTFY_GLYFComposite Children");
+            fprintf(
+                stderr, "%s\n",
+                "Failed To Allocate Memory For TTFY_GLYFComposite Children");
             free(ret->children);
             free(ret);
             return NULL;
@@ -218,7 +228,8 @@ void TTFY_GLYFCompositeDestroy(TTFY_GLYFComposite **composite_glyf)
 {
     if (!composite_glyf)
     {
-        fprintf(stderr, "%s\n", "Invalid Pointer to TTFY_TTFYComposite has been passed");
+        fprintf(stderr, "%s\n",
+                "Invalid Pointer to TTFY_TTFYComposite has been passed");
         return;
     }
     if (!*composite_glyf)
@@ -280,7 +291,8 @@ TTFY_GLYFSimple *TTFY_GLYFCompositeToGLYFSimple(TTFY_GLYFSimple *simple_glyf)
     return NULL;
 }
 
-TTFY_GLYF *TTFY_GLYFCreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory, TTFY_MAXP *maxp, TTFY_LOCA *loca)
+TTFY_GLYF *TTFY_GLYFCreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory,
+                           TTFY_MAXP *maxp, TTFY_LOCA *loca)
 {
     if (!buffer)
     {
@@ -303,7 +315,8 @@ TTFY_GLYF *TTFY_GLYFCreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory, 
         return NULL;
     }
 
-    TTFY_TableRecord *glyf_record = TTFY_TableDirectoryGetTableRecord(directory, TTFY_TABLE_NAME_GLYF);
+    TTFY_TableRecord *glyf_record =
+        TTFY_TableDirectoryGetTableRecord(directory, TTFY_TABLE_NAME_GLYF);
     if (!glyf_record)
     {
         fprintf(stderr, "%s\n", "Failed To Locate TTFY_GLYF");
@@ -328,7 +341,8 @@ TTFY_GLYF *TTFY_GLYFCreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory, 
     ret->headers = malloc(sizeof(TTFY_GLYFHeader *) * ret->numOfGlyps);
     if (!ret->headers)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For Headers TTFY_GLYF");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory For Headers TTFY_GLYF");
         free(ret);
         return NULL;
     }
@@ -336,16 +350,19 @@ TTFY_GLYF *TTFY_GLYFCreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory, 
     ret->simple_glyfs = malloc(sizeof(TTFY_GLYFSimple *) * ret->numOfGlyps);
     if (!ret->simple_glyfs)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For Simple Glyphs TTFY_GLYF");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory For Simple Glyphs TTFY_GLYF");
         free(ret->headers);
         free(ret);
         return NULL;
     }
 
-    ret->composite_glyfs = malloc(sizeof(TTFY_GLYFComposite *) * ret->numOfGlyps);
+    ret->composite_glyfs =
+        malloc(sizeof(TTFY_GLYFComposite *) * ret->numOfGlyps);
     if (!ret->simple_glyfs)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For Composite Glyphs TTFY_GLYF");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory For Composite Glyphs TTFY_GLYF");
         free(ret->headers);
         free(ret->simple_glyfs);
         free(ret);
@@ -525,7 +542,8 @@ TTFY_GLYFComposite *TTFY_GLYFGetCompositeGlyf(TTFY_GLYF *glyf, uint16 ID)
     return glyf->composite_glyfs[glyf->headers[ID]->GLYPH_ID];
 }
 
-TTFY_GLYFHeader *TTFY_GLYFHeaderCreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory)
+TTFY_GLYFHeader *TTFY_GLYFHeaderCreate(TTFY_Buffer *buffer,
+                                       TTFY_TableDirectory *directory)
 {
     if (!buffer)
     {
@@ -541,7 +559,8 @@ TTFY_GLYFHeader *TTFY_GLYFHeaderCreate(TTFY_Buffer *buffer, TTFY_TableDirectory 
     TTFY_GLYFHeader *ret = malloc(sizeof(TTFY_GLYFHeader));
     if (!ret)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For TTFY_GLYFHeader");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory For TTFY_GLYFHeader");
         return NULL;
     }
 
@@ -558,7 +577,8 @@ void TTFY_GLYFHeaderDestroy(TTFY_GLYFHeader **glyf_header)
 {
     if (!glyf_header)
     {
-        fprintf(stderr, "%s\n", "Invalid Pointer to TTFY_GLYFHeader has been passed");
+        fprintf(stderr, "%s\n",
+                "Invalid Pointer to TTFY_GLYFHeader has been passed");
         return;
     }
     if (!*glyf_header)
@@ -620,7 +640,8 @@ int16 TTFY_GLYFHeaderGetYMax(TTFY_GLYFHeader *glyf_header)
     return glyf_header->yMax;
 }
 
-TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *header)
+TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer,
+                                       TTFY_GLYFHeader *header)
 {
     if (!buffer)
     {
@@ -637,21 +658,25 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
     TTFY_GLYFSimple *ret = malloc(sizeof(TTFY_GLYFSimple));
     if (!ret)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For TTFY_GLYFSimple");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory For TTFY_GLYFSimple");
         return NULL;
     }
 
     ret->numberOfContours = TTFY_GLYFHeaderGetNumOfCountours(header);
     if (!ret->numberOfContours)
     {
-        fprintf(stderr, "%s\n", "Invalid Number Of Contours TTFY_GLYFHeader has been passed");
+        fprintf(stderr, "%s\n",
+                "Invalid Number Of Contours TTFY_GLYFHeader has been passed");
         return NULL;
     }
 
     ret->endPtsOfCountours = malloc(sizeof(uint16) * ret->numberOfContours);
     if (!ret->endPtsOfCountours)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory For TTFY_GLYFSimple endPtsOfContours");
+        fprintf(
+            stderr, "%s\n",
+            "Failed To Allocate Memory For TTFY_GLYFSimple endPtsOfContours");
         free(ret);
         return NULL;
     }
@@ -660,13 +685,16 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
     {
         ret->endPtsOfCountours[i] = TTFY_BufferGetU16(buffer);
     }
+
     ret->instructionLength = TTFY_BufferGetU16(buffer);
     if (ret->instructionLength)
     {
         ret->instructions = malloc(sizeof(uint8) * ret->instructionLength);
         if (!ret->instructionLength)
         {
-            fprintf(stderr, "%s\n", "Failed To Allocate Memory For TTFY_GLYFSimple instructions");
+            fprintf(
+                stderr, "%s\n",
+                "Failed To Allocate Memory For TTFY_GLYFSimple instructions");
             free(ret->endPtsOfCountours);
             free(ret);
             return NULL;
@@ -695,7 +723,8 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
     ret->flags = malloc(sizeof(uint8) * ret->flagsLength);
     if (!ret->flags)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory TTFY_GLYFSimple Flags");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory TTFY_GLYFSimple Flags");
         free(ret->endPtsOfCountours);
         if (ret->instructions != 0)
             free(ret->instructions);
@@ -711,8 +740,8 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
             uint8 r = TTFY_BufferGetU8(buffer);
             for (uint8 j = 0; j < r; ++j)
             {
-
-                ret->flags[i + j + 1] = ret->flags[i];
+                if (i + j + 1 < ret->flagsLength)
+                    ret->flags[i + j + 1] = ret->flags[i];
             }
             i += r;
         }
@@ -721,7 +750,8 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
     ret->xCoordinates = malloc(sizeof(int16) * ret->flagsLength);
     if (!ret->xCoordinates)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory TTFY_GLYFSimple XCoordinates");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory TTFY_GLYFSimple XCoordinates");
         free(ret->endPtsOfCountours);
         if (ret->instructions != 0)
             free(ret->instructions);
@@ -732,19 +762,24 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
 
     for (uint16 i = 0; i < ret->flagsLength; ++i)
     {
-        if (!(ret->flags[i] & X_SHORT_VECTOR) && !(ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
+        if (!(ret->flags[i] & X_SHORT_VECTOR) &&
+            !(ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
         {
             ret->xCoordinates[i] = TTFY_BufferGetI16(buffer);
         }
-        else if (!(ret->flags[i] & X_SHORT_VECTOR) && (ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
+        else if (!(ret->flags[i] & X_SHORT_VECTOR) &&
+                 (ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
         {
-            ret->xCoordinates[i] = ret->xCoordinates[i - 1];
+            if (i >= 1)
+                ret->xCoordinates[i] = ret->xCoordinates[i - 1];
         }
-        else if ((ret->flags[i] & X_SHORT_VECTOR) && (ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
+        else if ((ret->flags[i] & X_SHORT_VECTOR) &&
+                 (ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
         {
             ret->xCoordinates[i] = TTFY_BufferGetU8(buffer);
         }
-        else if ((ret->flags[i] & X_SHORT_VECTOR) && !(ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
+        else if ((ret->flags[i] & X_SHORT_VECTOR) &&
+                 !(ret->flags[i] & X_IS_SAME_OR_POSITIVE_X_SHORT_VECTOR))
         {
             ret->xCoordinates[i] = -TTFY_BufferGetU8(buffer);
         }
@@ -753,7 +788,8 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
     ret->yCoordinates = malloc(sizeof(int16) * ret->flagsLength);
     if (!ret->yCoordinates)
     {
-        fprintf(stderr, "%s\n", "Failed To Allocate Memory TTFY_GLYFSimple YCoordinates");
+        fprintf(stderr, "%s\n",
+                "Failed To Allocate Memory TTFY_GLYFSimple YCoordinates");
         free(ret->endPtsOfCountours);
         if (ret->instructions != 0)
             free(ret->instructions);
@@ -765,19 +801,24 @@ TTFY_GLYFSimple *TTFY_GLYFSimpleCreate(TTFY_Buffer *buffer, TTFY_GLYFHeader *hea
 
     for (uint16 i = 0; i < ret->flagsLength; ++i)
     {
-        if (!(ret->flags[i] & Y_SHORT_VECTOR) && !(ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
+        if (!(ret->flags[i] & Y_SHORT_VECTOR) &&
+            !(ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
         {
             ret->yCoordinates[i] = TTFY_BufferGetI16(buffer);
         }
-        else if (!(ret->flags[i] & Y_SHORT_VECTOR) && (ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
+        else if (!(ret->flags[i] & Y_SHORT_VECTOR) &&
+                 (ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
         {
-            ret->yCoordinates[i] = ret->yCoordinates[i - 1];
+            if (i >= 1)
+                ret->yCoordinates[i] = ret->yCoordinates[i - 1];
         }
-        else if ((ret->flags[i] & Y_SHORT_VECTOR) && (ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
+        else if ((ret->flags[i] & Y_SHORT_VECTOR) &&
+                 (ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
         {
             ret->yCoordinates[i] = TTFY_BufferGetU8(buffer);
         }
-        else if ((ret->flags[i] & Y_SHORT_VECTOR) && !(ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
+        else if ((ret->flags[i] & Y_SHORT_VECTOR) &&
+                 !(ret->flags[i] & Y_IS_SAME_OR_POSITIVE_Y_SHORT_VECTOR))
         {
             ret->yCoordinates[i] = -TTFY_BufferGetU8(buffer);
         }
@@ -789,7 +830,8 @@ void TTFY_GLYFSimpleDestroy(TTFY_GLYFSimple **simple_glyf)
 {
     if (!simple_glyf)
     {
-        fprintf(stderr, "%s\n", "Invalid Pointer to TTFY_GLYFSimple has been passed");
+        fprintf(stderr, "%s\n",
+                "Invalid Pointer to TTFY_GLYFSimple has been passed");
         return;
     }
     if (!*simple_glyf)
@@ -808,7 +850,8 @@ void TTFY_GLYFSimpleDestroy(TTFY_GLYFSimple **simple_glyf)
     *simple_glyf = NULL;
 }
 
-uint16 TTFY_GLYFSimpleGetEndPtOfCountour(TTFY_GLYFSimple *simple_glyf, uint16 ID)
+uint16 TTFY_GLYFSimpleGetEndPtOfCountour(TTFY_GLYFSimple *simple_glyf,
+                                         uint16 ID)
 {
     if (!simple_glyf)
     {

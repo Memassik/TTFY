@@ -62,7 +62,7 @@ void TTFY_BufferDestroy(TTFY_Buffer **buffer)
     }
     if ((*buffer)->buffer)
         free((*buffer)->buffer);
-    if (!(*buffer)->filePointer)
+    if ((*buffer)->filePointer)
         fclose((*buffer)->filePointer);
     free(*buffer);
     *buffer = NULL;
@@ -99,7 +99,8 @@ int16 TTFY_BufferGetI16(TTFY_Buffer *buffer)
 
 uint24 TTFY_BufferGetU24(TTFY_Buffer *buffer)
 {
-    return (uint24)(TTFY_BufferGetU8(buffer) << 16) | (TTFY_BufferGetU8(buffer) << 8) | (TTFY_BufferGetU8(buffer));
+    return (uint24)(TTFY_BufferGetU8(buffer) << 16) |
+           (TTFY_BufferGetU8(buffer) << 8) | (TTFY_BufferGetU8(buffer));
 }
 
 int24 TTFY_BufferGetI24(TTFY_Buffer *buffer)
@@ -117,7 +118,8 @@ uint32 TTFY_BufferGetU32(TTFY_Buffer *buffer)
 
 int32 TTFY_BufferGetI32(TTFY_Buffer *buffer)
 {
-    return (TTFY_BufferGetU8(buffer) << 24) | (TTFY_BufferGetU8(buffer) << 16) | (TTFY_BufferGetU8(buffer) << 8) | (TTFY_BufferGetU8(buffer));
+    return (TTFY_BufferGetU8(buffer) << 24) | (TTFY_BufferGetU8(buffer) << 16) |
+           (TTFY_BufferGetU8(buffer) << 8) | (TTFY_BufferGetU8(buffer));
 }
 
 Fixed TTFY_BufferGetFixed(TTFY_Buffer *buffer)
