@@ -6,9 +6,9 @@
 
 typedef struct TTFY_LOCA TTFY_LOCA;
 
-TTFY_LOCA *TTFY_LOCACreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory, TTFY_HEAD *head, TTFY_MAXP *maxp);
-void TTFY_LOCADestroy(TTFY_LOCA **loca);
+TTFY_API TTFY_LOCA *TTFY_LOCACreate(TTFY_Buffer *buffer, TTFY_TableDirectory *directory, TTFY_HEAD *head, TTFY_MAXP *maxp);
+TTFY_API void TTFY_LOCADestroy(TTFY_LOCA **loca);
 
-Offset32 TTFY_LOCAGetOffset(TTFY_LOCA *loca, uint16 ID);
+TTFY_API Offset32 TTFY_LOCAGetOffset(TTFY_LOCA *loca, uint16 ID);
 
 #endif

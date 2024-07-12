@@ -222,6 +222,9 @@ TTFY_TableRecord *TTFY_TableDirectoryGetTableRecord(TTFY_TableDirectory *tableDi
     case TTFY_TABLE_NAME_LOCA:
         record = TTFY_TableDirectoryFindTable(tableDirectory, "loca");
         break;
+    case TTFY_TABLE_NAME_GLYF:
+        record = TTFY_TableDirectoryFindTable(tableDirectory, "glyf");
+        break;
     default:
         return NULL;
         break;

@@ -10,6 +10,7 @@ typedef enum
     TTFY_TABLE_NAME_HTMX,
     TTFY_TABLE_NAME_NAME,
     TTFY_TABLE_NAME_LOCA,
+    TTFY_TABLE_NAME_GLYF,
 } TTFY_TableNameEnum;
 
 #endif
